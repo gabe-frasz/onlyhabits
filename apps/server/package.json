@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch ./src/server.ts",
+    "build": "tsup ./src/server.ts",
+    "start": "node ./dist/server",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma migrate reset --force"
+  },
+  "keywords": [],
+  "author": "Gabriel VS Frasão <gabrielvitor.frasao@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@prisma/client": "^4.10.1",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.13.0",
+    "zod": "^3.20.6"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^9.3.0",
+    "prisma": "^4.10.1",
+    "prisma-erd-generator": "^1.2.5",
+    "tsconfig": "workspace:*",
+    "tsup": "^6.6.3",
+    "tsx": "^3.12.3",
+    "typescript": "^4.7.4"
+  },
+  "prisma": {
+    "seed": "tsx ./prisma/seed.ts"
+  }
+}
