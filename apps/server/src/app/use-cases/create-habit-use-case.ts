@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 
+import { prismaHabitsRepository } from "@/infra/database";
 import { Habit, WeekDays } from "../entities";
 import { HabitsRepository } from "../repositories";
 
@@ -27,3 +28,5 @@ export class CreateHabit {
     return { habit };
   }
 }
+
+export const createHabit = new CreateHabit(prismaHabitsRepository);

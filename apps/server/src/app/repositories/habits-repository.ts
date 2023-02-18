@@ -1,6 +1,7 @@
 import { Habit } from "../entities";
 
 export interface HabitsRepository {
-  findMany: () => Promise<Habit[]>;
+  findManyByDate: (date: Date) => Promise<Habit[]>;
+  findCompletedByDate: (date: Date) => Promise<Habit["id"][] | null>;
   create: (habit: Habit) => Promise<void>;
 }

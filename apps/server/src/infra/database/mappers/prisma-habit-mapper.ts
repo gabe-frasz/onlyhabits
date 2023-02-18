@@ -1,4 +1,7 @@
-import { Habit as PrismaHabit, HabitWeekDays } from "@prisma/client";
+import {
+  Habit as PrismaHabit,
+  HabitWeekDays as PrismaHabitWeekDays,
+} from "@prisma/client";
 
 import { Habit, WeekDays } from "@/app/entities";
 
@@ -14,7 +17,7 @@ export class PrismaHabitMapper {
     };
   }
 
-  static toDomain(habit: PrismaHabit & { weekDays: HabitWeekDays[] }): Habit {
+  static toDomain(habit: PrismaHabit & { weekDays: PrismaHabitWeekDays[] }) {
     const weekDays = habit.weekDays.map((weekDay) => weekDay.week_day);
 
     return new Habit(
