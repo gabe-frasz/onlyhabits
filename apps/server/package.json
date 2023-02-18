@@ -6,6 +6,10 @@
     "dev": "tsx watch ./src/server.ts",
     "build": "tsup ./src/server.ts",
     "start": "node ./dist/server",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
+    "test:ui": "vitest --ui",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma migrate reset --force"
   },
@@ -22,12 +26,15 @@
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^9.3.0",
+    "@vitest/coverage-c8": "^0.28.5",
+    "@vitest/ui": "^0.28.5",
     "prisma": "^4.10.1",
     "prisma-erd-generator": "^1.2.5",
     "tsconfig": "workspace:*",
     "tsup": "^6.6.3",
     "tsx": "^3.12.3",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vitest": "^0.28.5"
   },
   "prisma": {
     "seed": "tsx ./prisma/seed.ts"

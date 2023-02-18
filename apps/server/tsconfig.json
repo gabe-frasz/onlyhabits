@@ -2,13 +2,15 @@
   "extends": "tsconfig/base.json",
   "compilerOptions": {
     "target": "ES2020",
+    "types": ["vitest/globals"],
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/infra/*": ["./src/infra/*"],
       "@/env": ["./src/env/index.ts"],
       "@/lib": ["./src/lib/index.ts"],
-      "@/utils": ["./src/utils/index.ts"]
+      "@/utils": ["./src/utils/index.ts"],
+      "test": ["./test/index.ts"]
     }
   },
-  "include": ["./src", "./prisma/seed.ts"]
+  "include": ["./src", "./prisma/seed.ts", "./test"]
 }

@@ -13,8 +13,15 @@ export class Habit {
   private _id: string;
   private props: HabitProps;
 
+  private validateTitle(title: string) {
+    if (title === "")
+      throw new Error("Habit title should not be an empty string");
+  }
+
   constructor(props: Replace<HabitProps, { createdAt?: Date }>, id?: string) {
     this._id = id ?? randomUUID();
+
+    this.validateTitle(props.title);
 
     this.props = {
       ...props,
@@ -31,6 +38,8 @@ export class Habit {
   }
 
   public set title(title: string) {
+    this.validateTitle(title);
+
     this.props.title = title;
   }
 
