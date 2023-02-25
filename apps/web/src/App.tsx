@@ -1,12 +1,13 @@
-import { Heading } from "@c6r/react";
-import { useState } from "react";
+import { Header, SummaryTable } from "./components/layouts";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <Heading>Hello World</Heading>
+    <div className="flex h-screen flex-col items-center justify-center">
+      <main className="flex w-full max-w-5xl flex-col gap-16 px-6">
+        <Header />
+
+        <SummaryTable />
+      </main>
     </div>
   );
 }
