@@ -13,8 +13,13 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@gabe-pkg/eslint-config": "^0.0.1",
+    "@gabe-pkg/eslint-config": "^0.0.2",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.23.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-turbo": "latest",
+    "eslint-plugin-react": "7.31.8",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "^0.2.3",
     "turbo": "latest"

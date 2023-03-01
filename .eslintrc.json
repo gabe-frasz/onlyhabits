@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["@gabe-pkg/eslint-config"],
+  "extends": ["next", "turbo", "prettier"],
   "settings": {
     "next": {
       "rootDir": ["apps/*/"]
