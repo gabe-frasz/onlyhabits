@@ -46,6 +46,34 @@ export class PrismaHabitsRepository implements HabitsRepository {
       data: PrismaHabitMapper.toPrisma(habit),
     });
   }
+
+  async toggleCompletedState(habitId: string, dayId: string) {
+    const dayHabit = await prisma.dayHabit.findUnique({
+      where: {
+        day_id_habit_id: {
+          habit_id: habitId,
+          day_id: dayId,
+        },
+      },
+    });
+
+    if (dayHabit) {
+      await prisma.dayHabit.delete({
+        where: {
+          id: dayHabit.id,
+        },
+      });
+
+      return;
+    }
+
+    await prisma.dayHabit.create({
+      data: {
+        habit_id: habitId,
+        day_id: dayId,
+      },
+    });
+  }
 }
 
 export const prismaHabitsRepository = new PrismaHabitsRepository();

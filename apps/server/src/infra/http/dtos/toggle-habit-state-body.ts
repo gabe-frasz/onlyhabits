@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const updateHabitStateBodySchema = z.object({
+export const toggleHabitStateBodySchema = z.object({
   id: z.string().uuid(),
 });

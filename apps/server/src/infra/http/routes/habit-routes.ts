@@ -1,10 +1,15 @@
 import { FastifyInstance } from "fastify";
 
-import { createHabit, getDayInfo } from "@/app/use-cases";
+import {
+  createHabit,
+  getDayInfo,
+  getSummary,
+  toggleHabitState,
+} from "@/app/use-cases";
 import {
   createHabitBodySchema,
   getDayInfoSchema,
-  updateHabitStateBodySchema,
+  toggleHabitStateBodySchema,
 } from "../dtos";
 import { HabitViewModel } from "../view-models";
 
@@ -27,12 +32,10 @@ export async function habitRoutes(app: FastifyInstance) {
     res.send({ habits });
   });
 
-  app.get("/:id", async (req, res) => {
-    const parsedParams = updateHabitStateBodySchema.safeParse(req.params);
-    if (!parsedParams.success)
-      return res.status(400).send(parsedParams.error.message);
+  app.get("/summary", async (req, res) => {
+    const summary = await getSummary.execute();
 
-    const { id } = parsedParams.data;
+    res.send(summary);
   });
 
   app.post("/", async (req, res) => {
@@ -48,5 +51,17 @@ export async function habitRoutes(app: FastifyInstance) {
     });
 
     res.status(201).send();
+  });
+
+  app.patch("/:id/toggle", async (req, res) => {
+    const parsedParams = toggleHabitStateBodySchema.safeParse(req.params);
+    if (!parsedParams.success)
+      return res.status(400).send(parsedParams.error.message);
+
+    const { id } = parsedParams.data;
+
+    await toggleHabitState.execute(id);
+
+    res.send();
   });
 }
