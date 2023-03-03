@@ -1,6 +1,7 @@
-import { Button, Heading } from "@c6r/react";
-import { Plus } from "phosphor-react";
+import { Heading } from "@c6r/react";
+
 import { Logo } from "../../modules";
+import { NewHabitModal } from "./components";
 
 export const Header = () => {
   return (
@@ -11,13 +12,7 @@ export const Header = () => {
         </h1>
       </Heading>
 
-      <Button variant="outline" className="group py-2">
-        New habit
-        <Plus
-          weight="bold"
-          className="transition-transform group-hover:rotate-180"
-        />
-      </Button>
+      <NewHabitModal />
     </header>
   );
 };
