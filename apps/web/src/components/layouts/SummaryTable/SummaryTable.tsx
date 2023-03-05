@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 import { apiFetcher } from "@/lib";
 import { generateDatesFromYearBeginning } from "@/utils";
-import { HabitDay } from "../../modules";
+import { HabitDay, Spinner } from "../../modules";
 
 const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -15,12 +15,19 @@ type Summary = {
 }[];
 
 export const SummaryTable = () => {
-  const { data: summary } = useSWR<Summary>("/habits/summary", apiFetcher);
+  const {
+    data: summary,
+    isLoading,
+    error,
+  } = useSWR<Summary>("/habits/summary", apiFetcher);
 
   const dates = generateDatesFromYearBeginning();
 
   const minimumDatesSize = 18 * 7; // 18 weeks in days
   const amountOfDaysToFill = minimumDatesSize - dates.length;
+
+  if (isLoading) return <Spinner />;
+  if (error || !summary) return <div>Error</div>;
 
   return (
     <div className="flex w-full">
@@ -37,15 +44,15 @@ export const SummaryTable = () => {
 
       <div className="grid-rows-7 grid grid-flow-col gap-3">
         {dates.map((date) => {
-          const dayInSummary = summary?.find((day) =>
+          const dayInSummary = summary.find((day) =>
             dayjs(date).isSame(day.date, "day"),
           );
 
           return (
             <HabitDay
-              key={dayInSummary?.id ?? date.toString()}
+              key={date.toString()}
               date={date}
-              completed={dayInSummary?.completed}
+              defaultCompleted={dayInSummary?.completed}
               amount={dayInSummary?.amount}
             />
           );

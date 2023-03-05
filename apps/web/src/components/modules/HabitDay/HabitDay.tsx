@@ -1,19 +1,22 @@
-import { Checkbox, Label, Popover, Progress, Text } from "@c6r/react";
+import { Popover, Progress, Text } from "@c6r/react";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { useState } from "react";
 
+import { HabitsList } from "./components/HabitsList";
+
 interface HabitDayProps {
   date: Date;
-  completed?: number;
+  defaultCompleted?: number;
   amount?: number;
 }
 
 export const HabitDay = ({
   date,
-  completed = 0,
+  defaultCompleted = 0,
   amount = 0,
 }: HabitDayProps) => {
+  const [completed, setCompleted] = useState(defaultCompleted);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const progressPercentage =
@@ -21,6 +24,10 @@ export const HabitDay = ({
 
   const weekDay = dayjs(date).format("dddd");
   const dayAndMonth = dayjs(date).format("DD/MM");
+
+  function handleCompletedChange(completed: number) {
+    setCompleted(completed);
+  }
 
   return (
     <Popover.Root onOpenChange={setIsPopoverOpen}>
@@ -53,15 +60,7 @@ export const HabitDay = ({
           <Progress.Indicator progress={progressPercentage} />
         </Progress.Root>
 
-        <div className="flex flex-col gap-3">
-          <Label flex="row" className="w-fit cursor-pointer">
-            <Checkbox variant="success" className="bg-base-100" />
-
-            <Text className="transition-colors peer-data-[state=checked]:text-zinc-400 peer-data-[state=checked]:line-through">
-              Drink
-            </Text>
-          </Label>
-        </div>
+        <HabitsList date={date} onCompletedChange={handleCompletedChange} />
       </Popover.Content>
     </Popover.Root>
   );
