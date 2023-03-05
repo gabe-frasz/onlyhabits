@@ -1,10 +1,17 @@
 import { Button, Modal } from "@c6r/react";
 import { Plus } from "phosphor-react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+
 import { NewHabitForm } from "./NewHabitForm";
 
 export const NewHabitModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleFormSubmit() {
+    setIsModalOpen(false);
+    toast.success("Habit created!");
+  }
 
   return (
     <Modal.Root onOpenChange={setIsModalOpen}>
@@ -21,7 +28,7 @@ export const NewHabitModal = () => {
       <Modal.Content open={isModalOpen} className="w-full max-w-xs">
         <Modal.Title className="mb-8">Create Habit</Modal.Title>
 
-        <NewHabitForm />
+        <NewHabitForm onSuccess={handleFormSubmit} />
       </Modal.Content>
     </Modal.Root>
   );

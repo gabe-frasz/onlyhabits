@@ -1,3 +1,5 @@
+import { Toaster } from "react-hot-toast";
+
 import { Header, SummaryTable } from "./components/layouts";
 
 function App() {
@@ -8,6 +10,8 @@ function App() {
 
         <SummaryTable />
       </main>
+
+      <Toaster />
     </div>
   );
 }

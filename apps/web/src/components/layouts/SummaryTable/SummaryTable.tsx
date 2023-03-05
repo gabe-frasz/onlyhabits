@@ -1,9 +1,22 @@
+import dayjs from "dayjs";
+import useSWR from "swr";
+
+import { apiFetcher } from "@/lib";
 import { generateDatesFromYearBeginning } from "@/utils";
 import { HabitDay } from "../../modules";
 
 const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
+type Summary = {
+  id: string;
+  date: Date;
+  amount: number;
+  completed: number;
+}[];
+
 export const SummaryTable = () => {
+  const { data: summary } = useSWR<Summary>("/habits/summary", apiFetcher);
+
   const dates = generateDatesFromYearBeginning();
 
   const minimumDatesSize = 18 * 7; // 18 weeks in days
@@ -23,13 +36,20 @@ export const SummaryTable = () => {
       </div>
 
       <div className="grid-rows-7 grid grid-flow-col gap-3">
-        {dates.map((date) => (
-          <HabitDay
-            completed={Math.round(Math.random() * 5)}
-            amount={5}
-            key={date.toString()}
-          />
-        ))}
+        {dates.map((date) => {
+          const dayInSummary = summary?.find((day) =>
+            dayjs(date).isSame(day.date, "day"),
+          );
+
+          return (
+            <HabitDay
+              key={dayInSummary?.id ?? date.toString()}
+              date={date}
+              completed={dayInSummary?.completed}
+              amount={dayInSummary?.amount}
+            />
+          );
+        })}
 
         {amountOfDaysToFill > 0
           ? Array.from({ length: amountOfDaysToFill }).map((_, i) => (

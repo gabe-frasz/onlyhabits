@@ -1,16 +1,26 @@
-import { Popover, Progress } from "@c6r/react";
+import { Checkbox, Label, Popover, Progress, Text } from "@c6r/react";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { useState } from "react";
 
 interface HabitDayProps {
-  completed: number;
-  amount: number;
+  date: Date;
+  completed?: number;
+  amount?: number;
 }
 
-export const HabitDay = ({ completed, amount }: HabitDayProps) => {
+export const HabitDay = ({
+  date,
+  completed = 0,
+  amount = 0,
+}: HabitDayProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  const progressPercentage = Math.round((completed / amount) * 100);
+  const progressPercentage =
+    amount > 0 ? Math.round((completed / amount) * 100) : 0;
+
+  const weekDay = dayjs(date).format("dddd");
+  const dayAndMonth = dayjs(date).format("DD/MM");
 
   return (
     <Popover.Root onOpenChange={setIsPopoverOpen}>
@@ -33,12 +43,25 @@ export const HabitDay = ({ completed, amount }: HabitDayProps) => {
         open={isPopoverOpen}
         className="z-50 flex w-screen max-w-sm flex-col p-6"
       >
-        <span className="mb-1 font-semibold text-zinc-400">Thursday</span>
-        <span className="text-3xl font-extrabold leading-tight">02/03</span>
+        <Text className="mb-1 font-semibold text-zinc-400">{weekDay}</Text>
 
-        <Progress.Root className="bg-base-100 my-3 h-3">
+        <Text className="text-3xl font-extrabold leading-tight">
+          {dayAndMonth}
+        </Text>
+
+        <Progress.Root className="bg-base-100 my-6 h-3">
           <Progress.Indicator progress={progressPercentage} />
         </Progress.Root>
+
+        <div className="flex flex-col gap-3">
+          <Label flex="row" className="w-fit cursor-pointer">
+            <Checkbox variant="success" className="bg-base-100" />
+
+            <Text className="transition-colors peer-data-[state=checked]:text-zinc-400 peer-data-[state=checked]:line-through">
+              Drink
+            </Text>
+          </Label>
+        </div>
       </Popover.Content>
     </Popover.Root>
   );
