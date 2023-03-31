@@ -1,21 +1,19 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "author": "Gabriel VS Frasão <gabrielvitor.frasao@gmail.com>",
+  "license": "MIT",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
     "build": "tsup ./src/server.ts",
     "start": "node ./dist/server",
     "test": "vitest --run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --run --coverage",
-    "test:ui": "vitest --ui",
-    "db:migrate": "prisma migrate dev",
-    "db:seed": "prisma migrate reset --force"
+    "test.watch": "vitest",
+    "test.coverage": "vitest --run --coverage",
+    "test.ui": "vitest --ui --open",
+    "db.migrate": "prisma migrate dev",
+    "db.seed": "prisma migrate reset --force"
   },
-  "keywords": [],
-  "author": "Gabriel VS Frasão <gabrielvitor.frasao@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "@fastify/cors": "^8.2.0",
     "@prisma/client": "^4.10.1",
@@ -34,6 +32,7 @@
     "tsup": "^6.6.3",
     "tsx": "^3.12.3",
     "typescript": "^4.7.4",
+    "vite-tsconfig-paths": "^4.0.5",
     "vitest": "^0.28.5"
   },
   "prisma": {

@@ -20,32 +20,47 @@ cypress/screenshots
 cypress/videos
 .nyc_output
 
-# debug
+# Cache
+.cache
+.mf
+.rollup.cache
+
+# logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 lerna-debug.log*
 
-# local files
+# env files
 .env*
 !.env*.example
 
 # local DBs
 *.db
 *.sqlite
+*.sqlite-journal
 
-# local directories
+# local folders
 .turbo/
 .vercel/
 .expo/
+.astro/
+.solid/
+.docusaurus/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 
 # service workers
 sw.js*
-worker-*.js*
-workbox-*.js*
+worker*.js*
+workbox*.js*
 
-# IDE - VSCode
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -75,3 +90,4 @@ workbox-*.js*
 *.key
 *.mobileprovision
 *.orig.*
+Thumbs.db
