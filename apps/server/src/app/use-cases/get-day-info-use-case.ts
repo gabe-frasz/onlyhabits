@@ -6,11 +6,13 @@ export interface GetDayInfoRequest {
 }
 
 export class GetDayInfo {
-  constructor(private repository: HabitsRepository) {}
+  constructor(private habitsRepository: HabitsRepository) {}
 
   async execute(request: GetDayInfoRequest) {
-    const possibleHabits = await this.repository.findManyByDate(request.date);
-    const completedHabitsId = await this.repository.findCompletedByDate(
+    const possibleHabits = await this.habitsRepository.findManyByDate(
+      request.date,
+    );
+    const completedHabitsId = await this.habitsRepository.findCompletedByDate(
       request.date,
     );
 
