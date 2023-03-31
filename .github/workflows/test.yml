@@ -2,11 +2,11 @@ name: Test
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
 
 env:
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} # add turbo token to GitHub secrets
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: gabe-frasz
 
 jobs:
