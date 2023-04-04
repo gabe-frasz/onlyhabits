@@ -13,9 +13,9 @@ type Summary = {
 }[];
 
 export async function SummaryTable() {
-  const summary = (await fetch("http://localhost:3333/habits/summary").then(
-    (res) => res.json(),
-  )) as Summary;
+  const summary = (await fetch("http://localhost:3333/habits/summary", {
+    cache: "no-store",
+  }).then((res) => res.json())) as Summary;
 
   const dates = generateDatesFromYearBeginning();
 
