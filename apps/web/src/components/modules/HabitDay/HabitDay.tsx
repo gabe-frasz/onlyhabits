@@ -21,11 +21,10 @@ export const HabitDay = ({
   const [completed, setCompleted] = useState(defaultCompleted);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  const date = new Date(stringifiedDate);
-
   const progressPercentage =
     amount > 0 ? Math.round((completed / amount) * 100) : 0;
 
+  const date = new Date(stringifiedDate);
   const weekDay = dayjs(date).format("dddd");
   const dayAndMonth = dayjs(date).format("DD/MM");
 
@@ -36,7 +35,7 @@ export const HabitDay = ({
   return (
     <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <Popover.Trigger
-        className={c("h-10 w-10 rounded-lg border-2", {
+        className={c("h-10 w-10 rounded-lg border-2 transition-colors", {
           "border-base-100 bg-base-200": progressPercentage === 0,
           "bg-primary-900 border-primary-700":
             progressPercentage > 0 && progressPercentage <= 20,
