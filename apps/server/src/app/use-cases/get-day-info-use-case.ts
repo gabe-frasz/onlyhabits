@@ -1,4 +1,3 @@
-import { prismaHabitsRepository } from "@/infra/database";
 import { HabitsRepository } from "../repositories";
 
 export interface GetDayInfoRequest {
@@ -19,5 +18,3 @@ export class GetDayInfo {
     return { possibleHabits, completedHabitsId };
   }
 }
-
-export const getDayInfo = new GetDayInfo(prismaHabitsRepository);

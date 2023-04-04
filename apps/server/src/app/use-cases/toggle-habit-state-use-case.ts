@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 
-import { prismaDaysRepository, prismaHabitsRepository } from "@/infra/database";
 import { DaysRepository, HabitsRepository } from "../repositories";
 
 export class ToggleHabitState {
@@ -21,8 +20,3 @@ export class ToggleHabitState {
     await this.habitsRepository.toggleCompletedState(habitId, day.id);
   }
 }
-
-export const toggleHabitState = new ToggleHabitState(
-  prismaHabitsRepository,
-  prismaDaysRepository,
-);

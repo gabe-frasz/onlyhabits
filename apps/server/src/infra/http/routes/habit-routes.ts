@@ -1,11 +1,12 @@
 import { FastifyInstance } from "fastify";
 
 import {
-  createHabit,
-  getDayInfo,
+  CreateHabit,
+  GetDayInfo,
+  ToggleHabitState,
   getSummary,
-  toggleHabitState,
 } from "@/app/use-cases";
+import { prismaDaysRepository, prismaHabitsRepository } from "@/infra/database";
 import {
   createHabitBodySchema,
   getDayInfoSchema,
@@ -21,6 +22,7 @@ export async function habitRoutes(app: FastifyInstance) {
 
     const { date } = parsedParams.data;
 
+    const getDayInfo = new GetDayInfo(prismaHabitsRepository);
     const { possibleHabits, completedHabitsId } = await getDayInfo.execute({
       date,
     });
@@ -45,6 +47,7 @@ export async function habitRoutes(app: FastifyInstance) {
 
     const { title, weekDays } = parsedBody.data;
 
+    const createHabit = new CreateHabit(prismaHabitsRepository);
     await createHabit.execute({
       title,
       weekDays,
@@ -60,6 +63,10 @@ export async function habitRoutes(app: FastifyInstance) {
 
     const { id } = parsedParams.data;
 
+    const toggleHabitState = new ToggleHabitState(
+      prismaHabitsRepository,
+      prismaDaysRepository,
+    );
     await toggleHabitState.execute(id);
 
     res.send();
