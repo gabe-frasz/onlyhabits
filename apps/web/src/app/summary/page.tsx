@@ -2,8 +2,8 @@ import { Header, SummaryTable } from "@/components/layouts";
 
 export default function Summary() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <main className="flex w-full max-w-5xl flex-col gap-16 px-6">
+    <div className="flex min-h-screen items-center justify-center">
+      <main className="flex w-full max-w-5xl flex-col gap-16 px-6 py-6">
         <Header />
 
         <SummaryTable />

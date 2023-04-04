@@ -18,7 +18,7 @@ export const NewHabitModal = () => {
   return (
     <Modal.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <Modal.Trigger asChild>
-        <Button variant="outline" className="group ml-auto py-2">
+        <Button variant="outline" className="group py-2 sm:ml-auto">
           New habit
           <Plus
             weight="bold"
@@ -27,7 +27,7 @@ export const NewHabitModal = () => {
         </Button>
       </Modal.Trigger>
 
-      <Modal.Content className="w-full max-w-xs">
+      <Modal.Content className="w-full sm:max-w-xs">
         <Modal.Title className="mb-8">Create Habit</Modal.Title>
 
         <Form onSuccess={handleFormSubmit} />
