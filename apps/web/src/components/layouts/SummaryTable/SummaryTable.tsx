@@ -1,9 +1,7 @@
 import dayjs from "dayjs";
-import useSWR from "swr";
 
-import { apiFetcher } from "@/lib";
+import { HabitDay } from "@/components/modules";
 import { generateDatesFromYearBeginning } from "@/utils";
-import { HabitDay, Spinner } from "../../modules";
 
 const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -14,20 +12,15 @@ type Summary = {
   completed: number;
 }[];
 
-export const SummaryTable = () => {
-  const {
-    data: summary,
-    isLoading,
-    error,
-  } = useSWR<Summary>("/habits/summary", apiFetcher);
+export async function SummaryTable() {
+  const summary = (await fetch("http://localhost:3333/habits/summary").then(
+    (res) => res.json(),
+  )) as Summary;
 
   const dates = generateDatesFromYearBeginning();
 
-  const minimumDatesSize = 18 * 7; // 18 weeks in days
-  const amountOfDaysToFill = minimumDatesSize - dates.length;
-
-  if (isLoading) return <Spinner />;
-  if (error || !summary) return <div>Error</div>;
+  const minimumDatesLength = 18 * 7; // 18 weeks in days
+  const amountOfDaysToFill = minimumDatesLength - dates.length;
 
   return (
     <div className="flex w-full">
@@ -51,7 +44,7 @@ export const SummaryTable = () => {
           return (
             <HabitDay
               key={date.toString()}
-              date={date}
+              stringifiedDate={date.toDateString()}
               defaultCompleted={dayInSummary?.completed}
               amount={dayInSummary?.amount}
             />
@@ -69,4 +62,4 @@ export const SummaryTable = () => {
       </div>
     </div>
   );
-};
+}

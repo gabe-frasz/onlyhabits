@@ -1,23 +1,27 @@
+"use client";
+
 import { Popover, Progress, Text } from "@c6r/react";
-import clsx from "clsx";
 import dayjs from "dayjs";
 import { useState } from "react";
+import c from "tm-cl";
 
 import { HabitsList } from "./components/HabitsList";
 
 interface HabitDayProps {
-  date: Date;
+  stringifiedDate: string;
   defaultCompleted?: number;
   amount?: number;
 }
 
 export const HabitDay = ({
-  date,
+  stringifiedDate,
   defaultCompleted = 0,
   amount = 0,
 }: HabitDayProps) => {
   const [completed, setCompleted] = useState(defaultCompleted);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const date = new Date(stringifiedDate);
 
   const progressPercentage =
     amount > 0 ? Math.round((completed / amount) * 100) : 0;
@@ -30,9 +34,9 @@ export const HabitDay = ({
   }
 
   return (
-    <Popover.Root onOpenChange={setIsPopoverOpen}>
+    <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <Popover.Trigger
-        className={clsx("h-10 w-10 rounded-lg border-2", {
+        className={c("h-10 w-10 rounded-lg border-2", {
           "border-base-100 bg-base-200": progressPercentage === 0,
           "bg-primary-900 border-primary-700":
             progressPercentage > 0 && progressPercentage <= 20,
@@ -46,18 +50,18 @@ export const HabitDay = ({
         })}
       />
 
-      <Popover.Content
-        open={isPopoverOpen}
-        className="z-50 flex w-screen max-w-sm flex-col p-6"
-      >
+      <Popover.Content className="z-50 flex w-screen max-w-sm flex-col p-6">
         <Text className="mb-1 font-semibold text-zinc-400">{weekDay}</Text>
 
         <Text className="text-3xl font-extrabold leading-tight">
           {dayAndMonth}
         </Text>
 
-        <Progress.Root className="bg-base-100 my-6 h-3">
-          <Progress.Indicator progress={progressPercentage} />
+        <Progress.Root
+          value={progressPercentage}
+          className="bg-base-100 my-6 h-3"
+        >
+          <Progress.Indicator />
         </Progress.Root>
 
         <HabitsList date={date} onCompletedChange={handleCompletedChange} />

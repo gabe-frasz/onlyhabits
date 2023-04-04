@@ -3,8 +3,6 @@ import { Check } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
-import { api } from "@/lib";
-
 const staticWeekDays = [
   "Sunday",
   "Monday",
@@ -15,11 +13,11 @@ const staticWeekDays = [
   "Saturday",
 ];
 
-interface NewHabitFormProps {
+interface FormProps {
   onSuccess?: () => void;
 }
 
-export const NewHabitForm = ({ onSuccess = () => {} }: NewHabitFormProps) => {
+export const Form = ({ onSuccess = () => {} }: FormProps) => {
   const [title, setTitle] = useState("");
   const [weekDays, setHabitWeekDays] = useState<number[]>([]);
 
@@ -41,7 +39,10 @@ export const NewHabitForm = ({ onSuccess = () => {} }: NewHabitFormProps) => {
       return;
     }
 
-    await api.post("/habits", { title, weekDays });
+    await fetch("http://localhost:5000/habits", {
+      method: "POST",
+      body: JSON.stringify({ title, weekDays }),
+    });
 
     onSuccess();
   }
@@ -65,21 +66,14 @@ export const NewHabitForm = ({ onSuccess = () => {} }: NewHabitFormProps) => {
 
         {staticWeekDays.map((day, i) => (
           <Label key={day} flex="row" className="w-fit cursor-pointer">
-            <Checkbox
-              onCheckedChange={() => handleToggleWeekDays(i)}
-              className="peer"
-            />
+            <Checkbox onCheckedChange={() => handleToggleWeekDays(i)} />
 
             {day}
           </Label>
         ))}
       </fieldset>
 
-      <Button
-        type="submit"
-        variant="success"
-        className="w-full justify-center text-white"
-      >
+      <Button type="submit" theme="success" className="w-full justify-center">
         <Check weight="bold" size={20} />
         Save
       </Button>
