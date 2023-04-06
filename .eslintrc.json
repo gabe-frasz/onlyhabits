@@ -1,6 +1,12 @@
 {
   "root": true,
-  "extends": ["next", "turbo", "prettier"],
+  "extends": [
+    "next",
+    "turbo",
+    "prettier",
+    "next/core-web-vitals",
+    "next/babel"
+  ],
   "settings": {
     "next": {
       "rootDir": ["apps/*/"]

@@ -1,1 +1,1 @@
-export * from "./NewHabitModal";
+export { NewHabitModal } from "./NewHabitModal";

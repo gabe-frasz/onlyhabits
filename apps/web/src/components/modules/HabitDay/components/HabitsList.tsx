@@ -1,14 +1,10 @@
-import { Checkbox, Label, Text } from "@c6r/react";
+import { Checkbox, Label, Spinner, Text } from "@c6r/react";
 import dayjs from "dayjs";
 import useSWR from "swr";
 
-import { Spinner } from "@/components/modules";
-import { api, apiFetcher } from "@/lib";
-
-interface HabitsListProps {
-  date: Date;
-  onCompletedChange: (completed: number) => void;
-}
+const apiFetcher = async (key: string) => {
+  return await fetch(`http://localhost:3333${key}`).then((res) => res.json());
+};
 
 interface HabitsResponse {
   habits: {
@@ -20,6 +16,11 @@ interface HabitsResponse {
   }[];
 }
 
+interface HabitsListProps {
+  date: Date;
+  onCompletedChange: (completed: number) => void;
+}
+
 export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
   const { data, isLoading, error, mutate } = useSWR<HabitsResponse>(
     `/habits?date=${date.toISOString()}`,
@@ -29,7 +30,9 @@ export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
   const isDateInPast = dayjs(date).isBefore(new Date(), "day");
 
   async function handleToggleHabit(habitId: string) {
-    await api.patch(`/habits/${habitId}/toggle`);
+    await fetch(`http://localhost:3333/habits/${habitId}/toggle`, {
+      method: "PATCH",
+    });
 
     await mutate(data, {
       optimisticData(currentData?) {
@@ -49,7 +52,7 @@ export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
     });
   }
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner size={32} />;
   if (error || !data) return <div>Error</div>;
 
   return (
@@ -59,7 +62,7 @@ export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
         : data.habits.map((habit) => (
             <Label key={habit.id} flex="row" className="w-fit">
               <Checkbox
-                variant="success"
+                theme="success"
                 checked={habit.completed}
                 onCheckedChange={() => handleToggleHabit(habit.id)}
                 disabled={isDateInPast}

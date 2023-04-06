@@ -1,5 +1,6 @@
 {
   "name": "server",
+  "private": true,
   "author": "Gabriel VS Frasão <gabrielvitor.frasao@gmail.com>",
   "license": "MIT",
   "main": "dist/server.js",

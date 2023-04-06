@@ -1,9 +1,11 @@
+"use client";
+
 import { Button, Modal } from "@c6r/react";
 import { Plus } from "phosphor-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { NewHabitForm } from "./NewHabitForm";
+import { Form } from "./Form";
 
 export const NewHabitModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,9 +16,9 @@ export const NewHabitModal = () => {
   }
 
   return (
-    <Modal.Root onOpenChange={setIsModalOpen}>
+    <Modal.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <Modal.Trigger asChild>
-        <Button variant="outline" className="group ml-auto py-2">
+        <Button variant="outline" className="group py-2 sm:ml-auto">
           New habit
           <Plus
             weight="bold"
@@ -25,10 +27,10 @@ export const NewHabitModal = () => {
         </Button>
       </Modal.Trigger>
 
-      <Modal.Content open={isModalOpen} className="w-full max-w-xs">
+      <Modal.Content className="w-full sm:max-w-xs">
         <Modal.Title className="mb-8">Create Habit</Modal.Title>
 
-        <NewHabitForm onSuccess={handleFormSubmit} />
+        <Form onSuccess={handleFormSubmit} />
       </Modal.Content>
     </Modal.Root>
   );
