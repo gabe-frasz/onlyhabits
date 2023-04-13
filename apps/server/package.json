@@ -1,8 +1,6 @@
 {
   "name": "server",
   "private": true,
-  "author": "Gabriel VS Frasão <gabrielvitor.frasao@gmail.com>",
-  "license": "MIT",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
@@ -16,6 +14,7 @@
     "db.seed": "prisma migrate reset --force"
   },
   "dependencies": {
+    "@clerk/fastify": "^0.2.4",
     "@fastify/cors": "^8.2.0",
     "@prisma/client": "^4.10.1",
     "dayjs": "^1.11.7",

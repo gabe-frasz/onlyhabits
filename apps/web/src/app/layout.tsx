@@ -1,6 +1,8 @@
+import { ClerkProvider } from "@clerk/nextjs/app-beta";
+import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { Toaster } from "@/components/config";
 import "./globals.css";
@@ -24,7 +26,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={`bg-base-300 text-base-content ${inter.className}`}>
-        {children}
+        <ClerkProvider appearance={{ baseTheme: dark }}>
+          {children}
+        </ClerkProvider>
 
         <Toaster />
       </body>

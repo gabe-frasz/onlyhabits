@@ -26,5 +26,3 @@ export class GetSummary {
     `;
   }
 }
-
-export const getSummary = new GetSummary();

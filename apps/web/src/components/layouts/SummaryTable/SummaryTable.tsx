@@ -1,3 +1,4 @@
+import { auth } from "@clerk/nextjs/app-beta";
 import dayjs from "dayjs";
 
 import { HabitDay } from "@/components/modules";
@@ -13,8 +14,11 @@ type Summary = {
 }[];
 
 export async function SummaryTable() {
+  const { getToken } = auth();
+
   const summary = (await fetch("http://localhost:3333/habits/summary", {
     cache: "no-store",
+    headers: { Authorization: `Bearer ${await getToken()}` },
   }).then((res) => res.json())) as Summary;
 
   const dates = generateDatesFromYearBeginning();

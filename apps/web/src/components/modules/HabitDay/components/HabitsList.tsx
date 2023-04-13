@@ -1,10 +1,8 @@
 import { Checkbox, Label, Spinner, Text } from "@c6r/react";
+import { useAuth } from "@clerk/nextjs";
 import dayjs from "dayjs";
-import useSWR from "swr";
 
-const apiFetcher = async (key: string) => {
-  return await fetch(`http://localhost:3333${key}`).then((res) => res.json());
-};
+import { useClerkSWR } from "@/hooks";
 
 interface HabitsResponse {
   habits: {
@@ -22,16 +20,17 @@ interface HabitsListProps {
 }
 
 export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
-  const { data, isLoading, error, mutate } = useSWR<HabitsResponse>(
+  const { data, isLoading, error, mutate } = useClerkSWR<HabitsResponse>(
     `/habits?date=${date.toISOString()}`,
-    apiFetcher,
   );
+  const { getToken } = useAuth();
 
   const isDateInPast = dayjs(date).isBefore(new Date(), "day");
 
   async function handleToggleHabit(habitId: string) {
     await fetch(`http://localhost:3333/habits/${habitId}/toggle`, {
       method: "PATCH",
+      headers: { Authorization: `Bearer ${await getToken()}` },
     });
 
     await mutate(data, {
