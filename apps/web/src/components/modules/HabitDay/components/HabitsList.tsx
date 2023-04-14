@@ -19,13 +19,13 @@ interface HabitsListProps {
   onCompletedChange: (completed: number) => void;
 }
 
-export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
+export const HabitsList = (props: HabitsListProps) => {
   const { data, isLoading, error, mutate } = useClerkSWR<HabitsResponse>(
-    `/habits?date=${date.toISOString()}`,
+    `/habits?date=${props.date.toISOString()}`,
   );
   const { getToken } = useAuth();
 
-  const isDateInPast = dayjs(date).isBefore(new Date(), "day");
+  const isDateInPast = dayjs(props.date).isBefore(new Date(), "day");
 
   async function handleToggleHabit(habitId: string) {
     await fetch(`http://localhost:3333/habits/${habitId}/toggle`, {
@@ -44,7 +44,7 @@ export const HabitsList = ({ date, onCompletedChange }: HabitsListProps) => {
         const completedHabits = habitListWithToggledItem?.filter(
           (habit) => habit.completed,
         ).length;
-        onCompletedChange(completedHabits!);
+        props.onCompletedChange(completedHabits!);
 
         return { habits: habitListWithToggledItem! };
       },
