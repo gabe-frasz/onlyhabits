@@ -9,6 +9,7 @@ export class PrismaHabitMapper {
   static toPrisma(habit: Habit) {
     return {
       id: habit.id,
+      user_id: habit.userId,
       title: habit.title,
       created_at: habit.createdAt,
       weekDays: {
@@ -22,6 +23,7 @@ export class PrismaHabitMapper {
 
     return new Habit(
       {
+        userId: habit.user_id,
         title: habit.title,
         weekDays: new WeekDays(weekDays),
         createdAt: habit.created_at,

@@ -1,3 +1,4 @@
+import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { ToggleHabitState } from "@/app/use-cases";
@@ -19,11 +20,13 @@ export const toggleHabitState: RouteHandlerMethod = async (req, res) => {
 
   const { id } = parsedParams.data;
 
+  const { userId } = getAuth(req);
+
   const toggleHabitState = new ToggleHabitState(
     prismaHabitsRepository,
     prismaDaysRepository,
   );
-  await toggleHabitState.execute(id);
+  await toggleHabitState.execute({ habitId: id, userId: userId! });
 
   res.send();
 };

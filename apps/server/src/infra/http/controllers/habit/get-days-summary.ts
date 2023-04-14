@@ -1,3 +1,4 @@
+import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { GetSummary } from "@/app/use-cases";
@@ -11,8 +12,12 @@ import { GetSummary } from "@/app/use-cases";
  */
 
 export const getDaysSummary: RouteHandlerMethod = async (req, res) => {
+  const { userId } = getAuth(req)
+
   const getSummary = new GetSummary();
-  const summary = await getSummary.execute();
+  const summary = await getSummary.execute({
+    userId: userId!
+  });
 
   res.send(summary);
 };

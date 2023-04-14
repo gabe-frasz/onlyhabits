@@ -1,3 +1,5 @@
+import { UserButton } from "@clerk/nextjs/app-beta";
+
 import { NewHabitModal } from "./components";
 
 // TODO: Fix Heading component
@@ -11,6 +13,10 @@ export const Header = () => {
       </Heading> */}
 
       <NewHabitModal />
+
+      <div className="ml-4">
+        <UserButton afterSignOutUrl="/" />
+      </div>
     </header>
   );
 };

@@ -1,3 +1,4 @@
+import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { GetDayInfo } from "@/app/use-cases";
@@ -20,9 +21,12 @@ export const getHabits: RouteHandlerMethod = async (req, res) => {
 
   const { date } = parsedParams.data;
 
+  const { userId } = getAuth(req);
+
   const getDayInfo = new GetDayInfo(prismaHabitsRepository);
   const { possibleHabits, completedHabitsId } = await getDayInfo.execute({
     date,
+    userId: userId!,
   });
 
   const habits = possibleHabits.map((habit) =>
