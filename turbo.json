@@ -14,7 +14,7 @@
       "cache": false
     },
     "test": {
-      "cache": true,
+      "cache": false,
       "outputs": []
     }
   }
