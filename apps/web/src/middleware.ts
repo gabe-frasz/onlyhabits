@@ -23,11 +23,6 @@ export default withClerkMiddleware((req: NextRequest) => {
     return res.redirect(signInUrl);
   }
 
-  if (req.nextUrl.pathname === "/" && userId) {
-    const summaryUrl = new URL("/summary", req.url);
-    return res.redirect(summaryUrl);
-  }
-
   return res.next();
 });
 
