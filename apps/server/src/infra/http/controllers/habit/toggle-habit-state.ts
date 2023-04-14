@@ -1,4 +1,4 @@
-import { RouteHandlerMethod } from "fastify";
+import type { RouteHandlerMethod } from "fastify";
 
 import { ToggleHabitState } from "@/app/use-cases";
 import { prismaDaysRepository, prismaHabitsRepository } from "@/infra/database";
@@ -9,7 +9,7 @@ import { toggleHabitStateBodySchema } from "../../dtos";
  * @method PATCH
  * @description Mark habit as done/undone
  * @protected
- * @returns 200
+ * @returns 200 || 400
  */
 
 export const toggleHabitState: RouteHandlerMethod = async (req, res) => {

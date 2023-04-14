@@ -1,4 +1,4 @@
-import { RouteHandlerMethod } from "fastify";
+import type { RouteHandlerMethod } from "fastify";
 
 import { GetSummary } from "@/app/use-cases";
 

@@ -1,4 +1,4 @@
-import { RouteHandlerMethod } from "fastify";
+import type { RouteHandlerMethod } from "fastify";
 
 import { CreateHabit } from "@/app/use-cases";
 import { prismaHabitsRepository } from "@/infra/database";
@@ -9,7 +9,7 @@ import { createHabitBodySchema } from "../../dtos";
  * @method POST
  * @description Create a new habit
  * @protected
- * @returns 201
+ * @returns 201 || 400
  */
 
 export const createHabit: RouteHandlerMethod = async (req, res) => {

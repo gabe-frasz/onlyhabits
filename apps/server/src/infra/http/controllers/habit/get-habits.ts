@@ -1,4 +1,4 @@
-import { RouteHandlerMethod } from "fastify";
+import type { RouteHandlerMethod } from "fastify";
 
 import { GetDayInfo } from "@/app/use-cases";
 import { prismaHabitsRepository } from "@/infra/database";
@@ -10,7 +10,7 @@ import { HabitViewModel } from "../../view-models";
  * @method GET
  * @description Get all habits
  * @protected
- * @returns 200
+ * @returns 200 || 400
  */
 
 export const getHabits: RouteHandlerMethod = async (req, res) => {
