@@ -20,21 +20,26 @@ describe("Get day info Use Case", () => {
   it("should get the day info", async () => {
     vi.setSystemTime(myBirthday);
 
+    const userId = "some-id";
+
     const inMemoryHabitsRepository = new InMemoryHabitsRepository();
     const getDayInfo = new GetDayInfo(inMemoryHabitsRepository);
     const createHabit = new CreateHabit(inMemoryHabitsRepository);
 
     const { habit } = await createHabit.execute({
+      userId,
       title: "habit 1",
       weekDays: allWeek,
     });
 
     const { habit: habit2 } = await createHabit.execute({
+      userId,
       title: "habit 2",
       weekDays: [0, 1, 2],
     });
 
     const { completedHabitsId, possibleHabits } = await getDayInfo.execute({
+      userId,
       date: dayAfterBirthday,
     });
 

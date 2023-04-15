@@ -1,9 +1,8 @@
+import { auth } from "@clerk/nextjs/app-beta";
 import dayjs from "dayjs";
 
 import { HabitDay } from "@/components/modules";
-import { generateDatesFromYearBeginning } from "@/utils";
-
-const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+import { generateDatesFromYearBeginning, weekDays } from "@/utils";
 
 type Summary = {
   id: string;
@@ -12,18 +11,26 @@ type Summary = {
   completed: number;
 }[];
 
-export async function SummaryTable() {
-  const summary = (await fetch("http://localhost:3333/habits/summary", {
+const getSummary = async () => {
+  const { getToken } = auth();
+
+  const res = await fetch("http://localhost:3333/habits/summary", {
     cache: "no-store",
-  }).then((res) => res.json())) as Summary;
+    headers: { Authorization: `Bearer ${await getToken()}` },
+  });
+
+  return (await res.json()) as Summary;
+};
+
+export async function SummaryTable() {
+  const summary = await getSummary();
 
   const dates = generateDatesFromYearBeginning();
-
   const minimumDatesLength = 18 * 7; // 18 weeks in days
   const amountOfDaysToFill = minimumDatesLength - dates.length;
 
   return (
-    <div className="flex w-full flex-col sm:flex-row">
+    <section className="flex w-full flex-col sm:flex-row">
       <div className="bg-base-300 sticky top-0 flex justify-between gap-3 sm:flex-col">
         {weekDays.map((day, i) => (
           <div
@@ -62,6 +69,6 @@ export async function SummaryTable() {
             : null}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

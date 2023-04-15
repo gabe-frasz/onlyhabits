@@ -5,6 +5,7 @@ describe("Habit", () => {
   it("should create a habit", () => {
     const habit = new Habit(
       {
+        userId: "some-id",
         title: "some title",
         weekDays: new WeekDays([5]),
       },
@@ -18,7 +19,12 @@ describe("Habit", () => {
 
   it("should not create a habit with invalid title", () => {
     expect(
-      () => new Habit({ title: "", weekDays: new WeekDays([0]) }),
+      () =>
+        new Habit({
+          userId: "some-id",
+          title: "",
+          weekDays: new WeekDays([0]),
+        }),
     ).toThrow();
   });
 });

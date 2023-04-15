@@ -1,4 +1,5 @@
 import { Button, Checkbox, Input, Label } from "@c6r/react";
+import { useAuth } from "@clerk/nextjs";
 import { Check } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
@@ -18,6 +19,7 @@ interface FormProps {
 }
 
 export const Form = ({ onSuccess = () => {} }: FormProps) => {
+  const { getToken } = useAuth();
   const [title, setTitle] = useState("");
   const [weekDays, setHabitWeekDays] = useState<number[]>([]);
 
@@ -39,10 +41,18 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
       return;
     }
 
-    await fetch("http://localhost:5000/habits", {
-      method: "POST",
-      body: JSON.stringify({ title, weekDays }),
-    });
+    try {
+      await fetch("http://localhost:3333/habits", {
+        method: "POST",
+        body: JSON.stringify({ title, weekDays }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${await getToken()}`,
+        },
+      });
+    } catch (error) {
+      return console.log(error);
+    }
 
     onSuccess();
   }

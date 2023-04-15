@@ -6,7 +6,7 @@ import { prisma } from "@/lib";
 import { PrismaHabitMapper } from "../../mappers";
 
 export class PrismaHabitsRepository implements HabitsRepository {
-  async findManyByDate(date: Date) {
+  async findManyByDate(date: Date, userId: string) {
     const weekDay = dayjs(date).startOf("day").get("day");
 
     const possibleHabits = await prisma.habit.findMany({
@@ -19,6 +19,7 @@ export class PrismaHabitsRepository implements HabitsRepository {
             week_day: weekDay,
           },
         },
+        user_id: userId,
       },
       include: {
         weekDays: true,
@@ -28,10 +29,13 @@ export class PrismaHabitsRepository implements HabitsRepository {
     return possibleHabits.map(PrismaHabitMapper.toDomain);
   }
 
-  async findCompletedByDate(date: Date) {
+  async findCompletedByDate(date: Date, userId: string) {
     const day = await prisma.day.findUnique({
       where: {
-        date: dayjs(date).toDate(),
+        user_id_date: {
+          user_id: userId,
+          date: dayjs(date).toDate(),
+        },
       },
       include: {
         dayHabits: true,

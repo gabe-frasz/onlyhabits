@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@c6r/react": "^1.8.2",
+    "@clerk/nextjs": "^4.16.1",
+    "@clerk/themes": "^1.6.0",
     "dayjs": "^1.11.7",
-    "next": "13.2.4",
+    "next": "13.3.0",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

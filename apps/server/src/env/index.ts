@@ -4,7 +4,7 @@ import { z } from "zod";
 if (process.env.NODE_ENV === "test") {
   config({ path: ".env.test" });
 } else {
-  config();
+  config({ path: ".env" });
 }
 
 const envSchema = z.object({
@@ -12,6 +12,8 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
   WEB_ORIGIN_URL: z.string().url(),
   DATABASE_URL: z.string().url(),
+  CLERK_PUBLISHABLE_KEY: z.string(),
+  CLERK_SECRET_KEY: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);

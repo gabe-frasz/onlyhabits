@@ -7,6 +7,7 @@ describe("Create habit Use Case", () => {
     const createHabit = new CreateHabit(new InMemoryHabitsRepository());
 
     const { habit } = await createHabit.execute({
+      userId: "some-id",
       title: "some title",
       weekDays: [0, 2, 4],
     });

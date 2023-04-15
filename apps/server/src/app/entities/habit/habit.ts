@@ -4,6 +4,7 @@ import type { Replace } from "@/utils";
 import { WeekDays } from "./week-days";
 
 export interface HabitProps {
+  userId: string;
   title: string;
   weekDays: WeekDays;
   createdAt: Date;
@@ -14,7 +15,7 @@ export class Habit {
   private props: HabitProps;
 
   private validateTitle(title: string) {
-    if (title === "")
+    if (title.trim() === "")
       throw new Error("Habit title should not be an empty string");
   }
 
@@ -31,6 +32,10 @@ export class Habit {
 
   public get id() {
     return this._id;
+  }
+
+  public get userId() {
+    return this.props.userId;
   }
 
   public get title() {

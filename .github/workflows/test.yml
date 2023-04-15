@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version:
+          - 18.x
 
     steps:
       - uses: actions/checkout@v3
@@ -30,13 +31,14 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm run test
-        
+
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
-        
+        node-version:
+          - 18.x
+
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
