@@ -1,0 +1,28 @@
+test:
+  - "**/*.spec.*"
+  - "**/test/*"
+  - "**/test/**/*"
+
+ci:
+  - .github/workflows/*
+  - .github/labeler.yml
+
+docs:
+  - apps/docs/*
+  - apps/docs/**/*
+  - .github/docs/*
+  - .github/docs/**/*
+  - "**/README.md"
+  - "**/CONTRIBUTING.md"
+
+web:
+  - apps/web/*.ts
+  - apps/web/**/*.ts
+
+mobile:
+  - mobile/*
+  - mobile/**/*
+
+server:
+  - apps/server/*
+  - apps/server/**/*
