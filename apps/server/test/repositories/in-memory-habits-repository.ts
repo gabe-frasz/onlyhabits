@@ -5,15 +5,24 @@ import { HabitsRepository } from "@/app/repositories";
 
 export class InMemoryHabitsRepository implements HabitsRepository {
   private habits: Habit[] = [];
-  private days: { id: string; date: Date; habit_ids: string[] }[] = [];
+  private days: {
+    id: string;
+    date: Date;
+    habit_ids: string[];
+    user_id: string;
+  }[] = [];
 
-  async findManyByDate(date: Date) {
-    return this.habits.filter((habit) => habit.createdAt <= date);
+  async findManyByDate(date: Date, userId: string) {
+    return this.habits.filter(
+      (habit) => habit.createdAt <= date && habit.userId === userId,
+    );
   }
 
-  async findCompletedByDate(date: Date) {
-    const day = this.days.find((day) => day.date === dayjs(date).toDate());
-    const completedHabits = day?.habit_ids.map((habit) => habit);
+  async findCompletedByDate(date: Date, userId: string) {
+    const day = this.days.find(
+      (day) => day.date === dayjs(date).toDate() && day.user_id === userId,
+    );
+    const completedHabits = day?.habit_ids;
 
     return completedHabits ?? null;
   }
