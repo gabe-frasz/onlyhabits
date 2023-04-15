@@ -19,7 +19,7 @@ const getSummary = async () => {
     headers: { Authorization: `Bearer ${await getToken()}` },
   });
 
-  return res.json() as unknown as Summary;
+  return (await res.json()) as Summary;
 };
 
 export async function SummaryTable() {
