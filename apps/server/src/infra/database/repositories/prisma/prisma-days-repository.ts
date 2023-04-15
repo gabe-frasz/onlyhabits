@@ -1,9 +1,10 @@
 import { DaysRepository } from "@/app/repositories";
 import { prisma } from "@/lib";
+import { PrismaDayMapper } from "../../mappers";
 
 export class PrismaDaysRepository implements DaysRepository {
   async findOne(date: Date, userId: string) {
-    return await prisma.day.findUnique({
+    const day = await prisma.day.findUnique({
       where: {
         user_id_date: {
           user_id: userId,
@@ -11,15 +12,19 @@ export class PrismaDaysRepository implements DaysRepository {
         },
       },
     });
+
+    return day ? PrismaDayMapper.toDomain(day) : null;
   }
 
   async create(date: Date, userId: string) {
-    return await prisma.day.create({
+    const day = await prisma.day.create({
       data: {
         user_id: userId,
         date,
       },
     });
+
+    return PrismaDayMapper.toDomain(day);
   }
 }
 
