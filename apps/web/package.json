@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@c6r/react": "^1.8.2",
+    "@c6r/react": "^1.8.3",
     "@clerk/nextjs": "^4.16.1",
     "@clerk/themes": "^1.6.0",
     "dayjs": "^1.11.7",

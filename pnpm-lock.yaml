@@ -105,8 +105,8 @@ importers:
   apps/web:
     dependencies:
       '@c6r/react':
-        specifier: ^1.8.2
-        version: 1.8.2(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.3)
+        specifier: ^1.8.3
+        version: 1.8.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.3)
       '@clerk/nextjs':
         specifier: ^4.16.1
         version: 4.16.1(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
@@ -204,8 +204,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@c6r/react@1.8.2(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.3):
-    resolution: {integrity: sha512-ulTZ7VuFlBm7XGnr4Q8d3A7CTmMsAwbAgynYMWtM78M1JKeYiKUPfIO9Yx/VSb25TL/SyyuJ6d5J33iyhi5L3A==}
+  /@c6r/react@1.8.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.3):
+    resolution: {integrity: sha512-vl35xz2qwQNftgV0pCt5J06ZsrPdnNXako1V3kPxg4ETuh8R2o5nrZpN+AjBeSvOt8/IBX5nmjSL0zDQQFLJYg==}
     dependencies:
       '@headlessui/react': 1.7.13(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-alert-dialog': 1.0.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
