@@ -42,7 +42,7 @@ export async function SummaryTable() {
         ))}
       </div>
 
-      <div className="sm:max-h-none overflow-y-scroll sm:overflow-y-auto sm:overflow-x-scroll">
+      <div className="overflow-y-scroll sm:max-h-none sm:overflow-y-auto sm:overflow-x-scroll">
         <div className="sm:grid-rows-7 grid min-w-fit grid-flow-row grid-cols-7 place-items-center gap-3 sm:grid sm:grid-flow-col sm:grid-cols-none">
           {dates.map((date) => {
             const dayInSummary = summary.find((day) =>
