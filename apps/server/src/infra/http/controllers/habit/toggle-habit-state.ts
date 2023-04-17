@@ -1,7 +1,7 @@
-import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { ToggleHabitState } from "@/app/use-cases";
+import { ClerkAuthAdapter } from "@/infra/auth";
 import { prismaDaysRepository, prismaHabitsRepository } from "@/infra/database";
 import { toggleHabitStateBodySchema } from "../../dtos";
 
@@ -14,13 +14,13 @@ import { toggleHabitStateBodySchema } from "../../dtos";
  */
 
 export const toggleHabitState: RouteHandlerMethod = async (req, res) => {
-  const parsedParams = toggleHabitStateBodySchema.safeParse(req.params);
-  if (!parsedParams.success)
-    return res.status(400).send(parsedParams.error.message);
+  const _params = toggleHabitStateBodySchema.safeParse(req.params);
+  if (!_params.success) return res.status(400).send(_params.error.message);
 
-  const { id } = parsedParams.data;
+  const { id } = _params.data;
 
-  const { userId } = getAuth(req);
+  const authAdapter = new ClerkAuthAdapter();
+  const userId = authAdapter.getUserId(req);
 
   const toggleHabitState = new ToggleHabitState(
     prismaHabitsRepository,
