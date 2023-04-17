@@ -1,7 +1,7 @@
-import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { GetDayInfo } from "@/app/use-cases";
+import { ClerkAuthAdapter } from "@/infra/auth";
 import { prismaHabitsRepository } from "@/infra/database";
 import { getDayInfoSchema } from "../../dtos";
 import { HabitViewModel } from "../../view-models";
@@ -15,13 +15,13 @@ import { HabitViewModel } from "../../view-models";
  */
 
 export const getHabits: RouteHandlerMethod = async (req, res) => {
-  const parsedParams = getDayInfoSchema.safeParse(req.query);
-  if (!parsedParams.success)
-    return res.status(400).send(parsedParams.error.message);
+  const _query = getDayInfoSchema.safeParse(req.query);
+  if (!_query.success) return res.status(400).send(_query.error.message);
 
-  const { date } = parsedParams.data;
+  const { date } = _query.data;
 
-  const { userId } = getAuth(req);
+  const authAdapter = new ClerkAuthAdapter();
+  const userId = authAdapter.getUserId(req);
 
   const getDayInfo = new GetDayInfo(prismaHabitsRepository);
   const { possibleHabits, completedHabitsId } = await getDayInfo.execute({

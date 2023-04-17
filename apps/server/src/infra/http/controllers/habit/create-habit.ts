@@ -1,7 +1,7 @@
-import { getAuth } from "@clerk/fastify";
 import type { RouteHandlerMethod } from "fastify";
 
 import { CreateHabit } from "@/app/use-cases";
+import { ClerkAuthAdapter } from "@/infra/auth";
 import { prismaHabitsRepository } from "@/infra/database";
 import { createHabitBodySchema } from "../../dtos";
 
@@ -14,13 +14,13 @@ import { createHabitBodySchema } from "../../dtos";
  */
 
 export const createHabit: RouteHandlerMethod = async (req, res) => {
-  const parsedBody = createHabitBodySchema.safeParse(req.body);
-  if (!parsedBody.success)
-    return res.status(400).send(parsedBody.error.message);
+  const _body = createHabitBodySchema.safeParse(req.body);
+  if (!_body.success) return res.status(400).send(_body.error.message);
 
-  const { userId } = getAuth(req);
+  const authAdapter = new ClerkAuthAdapter();
+  const userId = authAdapter.getUserId(req);
 
-  const { title, weekDays } = parsedBody.data;
+  const { title, weekDays } = _body.data;
 
   const createHabit = new CreateHabit(prismaHabitsRepository);
   await createHabit.execute({
