@@ -14,6 +14,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   CLERK_PUBLISHABLE_KEY: z.string(),
   CLERK_SECRET_KEY: z.string(),
+  CLERK_E2E_JWT_TEMPLATE: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);

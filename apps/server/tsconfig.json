@@ -9,7 +9,8 @@
       "@/env": ["./src/env/index.ts"],
       "@/lib": ["./src/lib/index.ts"],
       "@/utils": ["./src/utils/index.ts"],
-      "test": ["./test/index.ts"]
+      "test": ["./test/index.ts"],
+      "test/*": ["./test/*"]
     }
   },
   "include": ["./src", "./prisma/seed.ts", "./test"]

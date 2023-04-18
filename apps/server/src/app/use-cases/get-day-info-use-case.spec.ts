@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-import { InMemoryHabitsRepository } from "test";
+import { InMemoryHabitsRepository } from "test/repositories/in-memory-habits-repository";
 import { CreateHabit } from "./create-habit-use-case";
 import { GetDayInfo } from "./get-day-info-use-case";
 

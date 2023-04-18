@@ -1,4 +1,5 @@
-import { InMemoryDaysRepository, InMemoryHabitsRepository } from "test";
+import { InMemoryDaysRepository } from "test/repositories/in-memory-days-repository";
+import { InMemoryHabitsRepository } from "test/repositories/in-memory-habits-repository";
 import { CreateHabit } from "./create-habit-use-case";
 import { GetDayInfo } from "./get-day-info-use-case";
 import { ToggleHabitState } from "./toggle-habit-state-use-case";
