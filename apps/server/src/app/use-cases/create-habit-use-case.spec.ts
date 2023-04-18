@@ -1,4 +1,4 @@
-import { InMemoryHabitsRepository } from "test";
+import { InMemoryHabitsRepository } from "test/repositories/in-memory-habits-repository";
 import { Habit } from "../entities";
 import { CreateHabit } from "./create-habit-use-case";
 
