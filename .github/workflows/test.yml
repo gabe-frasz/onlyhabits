@@ -8,6 +8,8 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: gabe-frasz
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  SHADOW_DATABASE_URL: ${{ secrets.SHADOW_DATABASE_URL }}
 
 jobs:
   unit-testing:
