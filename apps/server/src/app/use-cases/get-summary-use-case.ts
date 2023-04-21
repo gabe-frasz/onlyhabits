@@ -4,6 +4,10 @@ interface GetSummaryRequest {
   userId: string;
 }
 
+/* TODO: Fix query
+ ! Query not working. Must change to Postgres query
+*/
+
 export class GetSummary {
   async execute(request: GetSummaryRequest) {
     return await prisma.$queryRaw`
