@@ -6,6 +6,7 @@
     "build": "turbo run build",
     "start": "turbo start",
     "test": "turbo run test",
+    "test.e2e": "turbo run test.e2e",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
