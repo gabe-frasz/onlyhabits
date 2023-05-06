@@ -51,7 +51,7 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-      - name: Generate Prisma Client and Test
+      - name: Test
         run: pnpm run test.e2e
 
   build:
