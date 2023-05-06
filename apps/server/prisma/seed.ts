@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// email: gabe+clerk_test@example.com
+// user email: gabe+clerk_test@example.com
 const userId = "user_2OQ7DSXwg8vIknsCJpgca4WzCIZ";
 
 const firstHabitId = "0730ffac-d039-4194-9571-01aa2aa0efbd";
@@ -15,16 +15,8 @@ const thirdHabitId = "fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00";
 const thirdHabitCreationDate = new Date("2023-01-08T03:00:00.000");
 
 async function main() {
-  await prisma.habit.deleteMany({
-    where: {
-      user_id: userId,
-    },
-  });
-  await prisma.day.deleteMany({
-    where: {
-      user_id: userId,
-    },
-  });
+  await prisma.habit.deleteMany();
+  await prisma.day.deleteMany();
 
   /**
    * Create habits
