@@ -10,9 +10,10 @@
     "test.watch": "vitest",
     "test.cov": "vitest --run --coverage",
     "test.ui": "vitest --ui --open",
-    "test.e2e": "vitest --config ./vitest-e2e.config.ts",
+    "test.e2e": "prisma generate && vitest --config ./vitest-e2e.config.ts",
     "db.mig.dev": "prisma migrate dev",
     "db.mig.deploy": "prisma migrate deploy",
+    "db.mig.reset": "prisma migrate reset",
     "db.seed": "prisma db seed"
   },
   "dependencies": {
