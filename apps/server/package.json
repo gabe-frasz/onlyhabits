@@ -5,14 +5,14 @@
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
     "build": "tsup ./src/server.ts",
-    "start": "pnpm db.migrate.deploy && node ./dist/server",
+    "start": "pnpm run db.mig.prod && node ./dist/server",
     "test": "vitest --run",
     "test.watch": "vitest",
     "test.cov": "vitest --run --coverage",
     "test.ui": "vitest --ui --open",
     "test.e2e": "prisma generate && vitest --config ./vitest-e2e.config.ts",
     "db.mig.dev": "prisma migrate dev",
-    "db.mig.deploy": "prisma migrate deploy",
+    "db.mig.prod": "prisma migrate deploy",
     "db.mig.reset": "prisma migrate reset",
     "db.seed": "prisma db seed"
   },
