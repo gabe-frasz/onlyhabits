@@ -19,6 +19,9 @@
     "test": {
       "cache": false,
       "outputs": []
+    },
+    "test.e2e": {
+      "cache": false
     }
   }
 }
