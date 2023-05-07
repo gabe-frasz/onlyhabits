@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/app-beta";
 import dayjs from "dayjs";
 
 import { HabitDay } from "@/components/modules";
+import { env } from "@/env";
 import { generateDatesFromYearBeginning, weekDays } from "@/utils";
 
 type Summary = {
@@ -14,7 +15,7 @@ type Summary = {
 const getSummary = async () => {
   const { getToken } = auth();
 
-  const res = await fetch("http://localhost:3333/habits/summary", {
+  const res = await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits/summary", {
     cache: "no-store",
     headers: { Authorization: `Bearer ${await getToken()}` },
   });
@@ -42,7 +43,7 @@ export async function SummaryTable() {
         ))}
       </div>
 
-      <div className="overflow-y-scroll sm:max-h-none sm:overflow-y-auto sm:overflow-x-scroll">
+      <div className="sm:max-h-none overflow-y-scroll sm:overflow-y-auto sm:overflow-x-scroll">
         <div className="sm:grid-rows-7 grid min-w-fit grid-flow-row grid-cols-7 place-items-center gap-3 sm:grid sm:grid-flow-col sm:grid-cols-none">
           {dates.map((date) => {
             const dayInSummary = summary.find((day) =>

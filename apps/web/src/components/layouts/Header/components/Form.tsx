@@ -4,6 +4,8 @@ import { Check } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
+import { env } from "@/env";
+
 const staticWeekDays = [
   "Sunday",
   "Monday",
@@ -42,7 +44,7 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
     }
 
     try {
-      await fetch("http://localhost:3333/habits", {
+      await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits", {
         method: "POST",
         body: JSON.stringify({ title, weekDays }),
         headers: {

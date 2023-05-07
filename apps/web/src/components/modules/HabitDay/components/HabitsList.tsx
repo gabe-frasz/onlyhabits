@@ -2,6 +2,7 @@ import { Checkbox, Label, Spinner, Text } from "@c6r/react";
 import { useAuth } from "@clerk/nextjs";
 import dayjs from "dayjs";
 
+import { env } from "@/env";
 import { useClerkSWR } from "@/hooks";
 
 interface HabitsResponse {
@@ -28,7 +29,7 @@ export const HabitsList = (props: HabitsListProps) => {
   const isDateInPast = dayjs(props.date).isBefore(new Date(), "day");
 
   async function handleToggleHabit(habitId: string) {
-    await fetch(`http://localhost:3333/habits/${habitId}/toggle`, {
+    await fetch(env.NEXT_PUBLIC_SERVER_API_URL + `/habits/${habitId}/toggle`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${await getToken()}` },
     });
