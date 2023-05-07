@@ -23,8 +23,8 @@ export class GetSummary {
           JOIN habits H
             ON H.id = HWD.habit_id
           WHERE
-            HWD.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
-            AND H.created_at <= D.date
+            HWD.week_day = cast(extract(dow from D.date::timestamp with time zone) as int)
+            AND H.created_at <= D.date::timestamp with time zone
             AND H.user_id = ${request.userId}
         ) as amount
       FROM days D

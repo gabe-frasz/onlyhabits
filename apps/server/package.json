@@ -8,12 +8,13 @@
     "start": "pnpm db.migrate.deploy && node ./dist/server",
     "test": "vitest --run",
     "test.watch": "vitest",
-    "test.coverage": "vitest --run --coverage",
+    "test.cov": "vitest --run --coverage",
     "test.ui": "vitest --ui --open",
-    "test.e2e": "vitest --config ./vitest-e2e.config.ts",
-    "db.migrate.dev": "prisma migrate dev",
-    "db.migrate.deploy": "prisma migrate deploy",
-    "db.seed": "prisma migrate reset --force"
+    "test.e2e": "prisma generate && vitest --config ./vitest-e2e.config.ts",
+    "db.mig.dev": "prisma migrate dev",
+    "db.mig.deploy": "prisma migrate deploy",
+    "db.mig.reset": "prisma migrate reset",
+    "db.seed": "prisma db seed"
   },
   "dependencies": {
     "@clerk/fastify": "^0.2.4",
