@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
     "build": "tsup ./src/server.ts",
-    "start": "pnpm run db.mig.prod && node ./dist/server",
+    "start": "pnpm run db.mig.prod && prisma generate && node ./dist/server",
     "test": "vitest --run",
     "test.watch": "vitest",
     "test.cov": "vitest --run --coverage",
