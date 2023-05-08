@@ -5,7 +5,7 @@ import Fastify from "fastify";
 import { env } from "./env";
 import { habitRoutes } from "./infra/http";
 
-export const app = Fastify({ logger: false });
+export const app = Fastify({ logger: true });
 
 const clerkOptions = {
   publishableKey: env.CLERK_PUBLISHABLE_KEY,
