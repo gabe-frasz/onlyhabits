@@ -13,7 +13,7 @@ const clerkOptions = {
 };
 
 // plugins
-app.register(cors, { origin: "*" });
+app.register(cors, { origin: [env.WEB_ORIGIN_URL] });
 app.register(clerkPlugin, clerkOptions);
 
 // routes
