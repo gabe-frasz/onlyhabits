@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "test") {
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
   PORT: z.coerce.number().default(3333),
-  WEB_ORIGIN_URL: z.string().url(),
+  WEB_ORIGIN_URL: z.string().url().or(z.literal("*")),
   DATABASE_URL: z.string().url(),
   CLERK_PUBLISHABLE_KEY: z.string(),
   CLERK_SECRET_KEY: z.string(),
