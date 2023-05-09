@@ -40,6 +40,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          directory: "./apps/server/coverage"
 
   e2e-testing:
     runs-on: ubuntu-latest
