@@ -1,4 +1,4 @@
-name: Test
+name: Unit & E2E tests
 
 on:
   pull_request:
@@ -34,8 +34,12 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-      - name: Test
-        run: pnpm run test
+      - name: Test with coverage
+        run: pnpm run test.cov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   e2e-testing:
     runs-on: ubuntu-latest
@@ -57,24 +61,3 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm run test.e2e
-
-#   build:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version:
-#           - 18.x
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: pnpm/action-setup@v2
-#         with:
-#           version: 7
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#           cache: "pnpm"
-#       - name: Install dependencies
-#         run: pnpm install
-#       - name: Build
-#         run: pnpm run build
