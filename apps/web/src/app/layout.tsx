@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs/app-beta";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import type { ReactNode } from "react";
 
 import { Toaster } from "@/components/config";
@@ -24,6 +25,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </ClerkProvider>
 
         <Toaster />
+
+        <Script
+          async
+          src="https://umami-bice.vercel.app/script.js"
+          data-website-id="c63cecab-ca3e-49e6-8f9c-caf0621cb987"
+        />
       </body>
     </html>
   );
