@@ -17,7 +17,7 @@
 ## Table of Contents
 
 - [General Info](#pushpin-general-information)
-- [Technologies Used](#hammer-technologies-i-used)
+- [Technologies used](#hammer-technologies-i-used)
 - [Features](#sparkles-features)
 - [What is next?](#eye-curious-to-see-whats-coming-next)
 - [Screenshots](#camera-screenshots)
@@ -37,7 +37,7 @@ Provide general information about your project here.
 
 > For more information about my dev journey, consider visiting my [LinkedIn](https://linkedin.com/in/gabriel-vs-frasao).
 
-## :hammer: Technologies I Used
+## :hammer: Technologies I used
 
 <details>
 <summary>
@@ -103,7 +103,7 @@ This repository is a monorepo and is built with [Turborepo](https://turbo.build/
 **Clone on your machine** (I personally use GitHub CLI)
 
 ```bash
-# by Github CLI
+# by GitHub CLI
 gh repo clone gabe-frasz/onlyhabits
 # or by git
 git clone https://github.com/gabe-frasz/onlyhabits.git
@@ -120,28 +120,28 @@ pnpm install
 pnpm run dev
 ```
 
-> obs: dev script uses the turbo cli, which starts all the workspaces at once. If you want to run a single workspace, make sure to use the `--filter` flag
+> obs: dev script uses the turbo cli, which starts all the workspaces at once. If you want to run a single workspace, make sure to use the `--filter` flag.
 
 ### :brain: Thinking of contributing to the project?
 
-Clone the repo as shown above :arrow_up: and feel free to create an issue or open a pull request.
+Clone the repo as shown above :arrow_up: and feel free to open an issue or a pull request.
 
 ## :heavy_check_mark: Project Status
 
 Project is complete
 
-| Status                                                                                                                                     | Project                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| ![Github deployments](https://img.shields.io/github/deployments/gabe-frasz/onlyhabits/production?label=vercel&logo=vercel&logoColor=white) | [web app](https://onlyhabits.vercel.app)       |
-| ![Railway deployment](https://img.shields.io/badge/railway-prod-green?logo=railway)                                                        | [server](onlyhabits-production.up.railway.app) |
+| Status | Project |
+| ------ | ------- |
+| ![Github deployments](https://img.shields.io/github/deployments/gabe-frasz/onlyhabits/production?label=vercel&logo=vercel&logoColor=white) | [web app](https://onlyhabits.vercel.app) |
+| ![Railway deployment](https://img.shields.io/badge/railway-prod-green?logo=railway) | [server](onlyhabits-production.up.railway.app) |
 
 ## :white_heart: Acknowledgement
 
-- **_OnlyHabits_** was based and inspired on [this one](https://github.com/rocketseat-education/nlw-setup-ignite).
-- Many thanks to [Rocketseat](https://github.com/Rocketseat).
+- **_OnlyHabits_** was based and inspired on [this one](https://github.com/rocketseat-education/nlw-setup-ignite)
+- Many thanks to [Rocketseat](https://github.com/Rocketseat)
 
 ## :memo: License & Contact
 
 [MIT License](https://github.com/gabe-frasz/onlyhabits/blob/main/LICENSE) &copy; Gabriel VS Frasão
 
-Feel free to get in touch with me on my [Gmail](mailto:gabrielvitor.frasao@gmail.com), [Instagram](https://instagram/gabe_frasz) or [LinkedIn](https://linkedin.com/in/gabriel-vs-frasao)
+Feel free to get in touch with me on my [Gmail](mailto:gabrielvitor.frasao@gmail.com), [Instagram](https://instagram/gabe_frasz) or [LinkedIn](https://linkedin.com/in/gabriel-vs-frasao).
