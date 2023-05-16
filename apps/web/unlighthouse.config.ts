@@ -9,4 +9,8 @@ export default defineConfig({
       seo: 90,
     },
   },
+  discovery: {
+    pagesDir: "src/app",
+    supportedExtensions: ["tsx"],
+  },
 });
