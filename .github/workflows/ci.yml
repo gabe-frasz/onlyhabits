@@ -1,4 +1,4 @@
-name: Unit & E2E tests
+name: OnlyHabits CI
 
 on:
   pull_request:
@@ -57,3 +57,29 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm run test.e2e
+
+  app-performance:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Extract branch name
+        run: echo "branch=$(echo ${GITHUB_HEAD_REF##*/})" >> $GITHUB_OUTPUT
+        id: extract_branch
+      - name: Scan app performance
+        run: |
+          cd apps/web/
+          pnpm unlighthouse-ci --site https://onlyhabits-git-${{ steps.extract_branch.outputs.branch }}-gabe-frasz.vercel.app
