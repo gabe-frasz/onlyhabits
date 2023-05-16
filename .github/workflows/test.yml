@@ -57,3 +57,20 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm run test.e2e
+        
+  temp:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+          
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+        id: extract_branch
+      - name: Display branch name
+        run: echo ${{ steps.extract_branch.outputs.branch }}
+      - name: Display PR author
+        run: echo ${{ github.event.pull_request.user.login }}
