@@ -67,8 +67,9 @@ jobs:
           
     steps:
       - name: Display branch name
-        run: echo ${GITHUB_HEAD_REF##*/}
+        run: echo "branch=$(echo ${GITHUB_HEAD_REF##*/})" >> $GITHUB_OUTPUT
+        id: extract_branch
       - name: Display PR author
         run: echo ${{ github.event.pull_request.user.login }}
       - name: Display Vercel Preview url
-        run: echo 'https://onlyhabits-${GITHUB_HEAD_REF##*/}-${{ github.event.pull_request.user.login }}.vercel.app'
+        run: echo 'https://onlyhabits-${{ steps.extract_branch.output.branch }}-${{ github.event.pull_request.user.login }}.vercel.app'
