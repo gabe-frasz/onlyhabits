@@ -66,11 +66,11 @@ jobs:
           - 18.x
           
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
-        id: extract_branch
+#       - name: Extract branch name
+#         shell: bash
+#         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+#         id: extract_branch
       - name: Display branch name
-        run: echo ${{ steps.extract_branch.outputs.branch }}
+        run: echo ${GITHUB_REF##*/}
       - name: Display PR author
         run: echo ${{ github.event.pull_request.user.login }}
