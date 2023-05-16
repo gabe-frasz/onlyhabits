@@ -82,4 +82,4 @@ jobs:
       - name: Scan app performance
         run: |
           cd apps/web/
-          unlighthouse-ci --site 'https://onlyhabits-git-${{ steps.extract_branch.outputs.branch }}-${{ github.event.pull_request.user.login }}.vercel.app'
+          unlighthouse-ci --site https://onlyhabits-git-${{ steps.extract_branch.outputs.branch }}-gabe-frasz.vercel.app
