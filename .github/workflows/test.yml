@@ -72,4 +72,4 @@ jobs:
       - name: Display PR author
         run: echo ${{ github.event.pull_request.user.login }}
       - name: Display Vercel Preview url
-        run: echo 'https://onlyhabits-${{ steps.extract_branch.output.branch }}-${{ github.event.pull_request.user.login }}.vercel.app'
+        run: echo 'https://onlyhabits-${{ steps.extract_branch.outputs.branch }}-${{ github.event.pull_request.user.login }}.vercel.app'
