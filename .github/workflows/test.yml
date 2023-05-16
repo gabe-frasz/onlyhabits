@@ -71,6 +71,6 @@ jobs:
 #         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 #         id: extract_branch
       - name: Display branch name
-        run: echo ${GITHUB_REF##*/}
+        run: echo ${GITHUB_HEAD_REF##*/}
       - name: Display PR author
         run: echo ${{ github.event.pull_request.user.login }}
