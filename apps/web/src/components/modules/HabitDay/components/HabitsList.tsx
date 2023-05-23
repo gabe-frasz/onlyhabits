@@ -1,4 +1,4 @@
-import { Checkbox, Label, Spinner, Text } from "@c6r/react";
+import { Checkbox, CheckboxIndicator, Label, Spinner, Text } from "@c6r/react";
 import { useAuth } from "@clerk/nextjs";
 import dayjs from "dayjs";
 
@@ -29,27 +29,23 @@ export const HabitsList = (props: HabitsListProps) => {
   const isDateInPast = dayjs(props.date).isBefore(new Date(), "day");
 
   async function handleToggleHabit(habitId: string) {
-    await fetch(env.NEXT_PUBLIC_SERVER_API_URL + `/habits/${habitId}/toggle`, {
-      method: "PATCH",
-      headers: { Authorization: `Bearer ${await getToken()}` },
-    });
+    const habitListWithToggledItem = data?.habits.map((habit) =>
+      habit.id === habitId ? { ...habit, completed: !habit.completed } : habit,
+    );
 
-    await mutate(data, {
-      optimisticData(currentData?) {
-        const habitListWithToggledItem = currentData?.habits.map((habit) =>
-          habit.id === habitId
-            ? { ...habit, completed: !habit.completed }
-            : habit,
-        );
+    const completedHabits = habitListWithToggledItem?.filter(
+      (habit) => habit.completed,
+    );
+    props.onCompletedChange(completedHabits?.length ?? 0);
 
-        const completedHabits = habitListWithToggledItem?.filter(
-          (habit) => habit.completed,
-        ).length;
-        props.onCompletedChange(completedHabits!);
+    await Promise.all([
+      fetch(env.NEXT_PUBLIC_SERVER_API_URL + `/habits/${habitId}/toggle`, {
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      }),
 
-        return { habits: habitListWithToggledItem! };
-      },
-    });
+      mutate({ habits: habitListWithToggledItem! }, { revalidate: false }),
+    ]);
   }
 
   if (isLoading) return <Spinner size={32} />;
@@ -67,7 +63,9 @@ export const HabitsList = (props: HabitsListProps) => {
                 onCheckedChange={() => handleToggleHabit(habit.id)}
                 disabled={isDateInPast}
                 className="bg-base-100 peer disabled:cursor-not-allowed"
-              />
+              >
+                <CheckboxIndicator />
+              </Checkbox>
 
               <Text className="cursor-pointer transition-colors peer-disabled:cursor-not-allowed peer-data-[state=checked]:text-zinc-400 peer-data-[state=checked]:line-through">
                 {habit.title}
