@@ -1,6 +1,13 @@
 "use client";
 
-import { Popover, Progress, Text } from "@c6r/react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Progress,
+  ProgressIndicator,
+  Text,
+} from "@c6r/react";
 import dayjs from "dayjs";
 import { useState } from "react";
 import c from "tm-cl";
@@ -19,7 +26,6 @@ export const HabitDay = ({
   amount = 0,
 }: HabitDayProps) => {
   const [completed, setCompleted] = useState(defaultCompleted);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const progressPercentage =
     amount > 0 ? Math.round((completed / amount) * 100) : 0;
@@ -33,8 +39,8 @@ export const HabitDay = ({
   }
 
   return (
-    <Popover.Root open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-      <Popover.Trigger
+    <Popover>
+      <PopoverTrigger
         className={c("h-10 w-10 rounded-lg border-2 transition-colors", {
           "border-base-100 bg-base-200": progressPercentage === 0,
           "bg-primary-900 border-primary-700":
@@ -49,22 +55,19 @@ export const HabitDay = ({
         })}
       />
 
-      <Popover.Content className="z-50 flex w-screen max-w-sm flex-col p-6">
+      <PopoverContent className="z-50 flex w-screen max-w-sm flex-col p-6">
         <Text className="mb-1 font-semibold text-zinc-400">{weekDay}</Text>
 
         <Text className="text-3xl font-extrabold leading-tight">
           {dayAndMonth}
         </Text>
 
-        <Progress.Root
-          value={progressPercentage}
-          className="bg-base-100 my-6 h-3"
-        >
-          <Progress.Indicator />
-        </Progress.Root>
+        <Progress value={progressPercentage} className="bg-base-100 my-6 h-3">
+          <ProgressIndicator />
+        </Progress>
 
         <HabitsList date={date} onCompletedChange={handleCompletedChange} />
-      </Popover.Content>
-    </Popover.Root>
+      </PopoverContent>
+    </Popover>
   );
 };
