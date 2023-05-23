@@ -5,14 +5,14 @@ import { Logo } from "@/components/modules";
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center">
+    <main className="flex h-screen flex-col items-center justify-center px-8">
       <Heading className="mb-12 text-3xl font-bold" asChild>
         <h1>
           <Logo />
         </h1>
       </Heading>
 
-      <Heading className="mb-4">
+      <Heading className="mb-4 text-center">
         Welcome to OnlyHabits! We are glad to have you here.
       </Heading>
 
