@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Modal } from "@c6r/react";
+import {
+  Button,
+  Modal,
+  ModalContent,
+  ModalTitle,
+  ModalTrigger,
+} from "@c6r/react";
 import { Plus } from "phosphor-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -16,8 +22,8 @@ export const NewHabitModal = () => {
   }
 
   return (
-    <Modal.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <Modal.Trigger asChild>
+    <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
+      <ModalTrigger asChild>
         <Button variant="outline" className="group py-2 sm:ml-auto">
           New habit
           <Plus
@@ -25,13 +31,13 @@ export const NewHabitModal = () => {
             className="transition-transform group-hover:rotate-180"
           />
         </Button>
-      </Modal.Trigger>
+      </ModalTrigger>
 
-      <Modal.Content className="w-full sm:max-w-xs">
-        <Modal.Title className="mb-8">Create Habit</Modal.Title>
+      <ModalContent className="w-full sm:max-w-xs">
+        <ModalTitle className="mb-8">Create Habit</ModalTitle>
 
         <Form onSuccess={handleFormSubmit} />
-      </Modal.Content>
-    </Modal.Root>
+      </ModalContent>
+    </Modal>
   );
 };

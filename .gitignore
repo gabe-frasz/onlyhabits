@@ -50,6 +50,7 @@ lerna-debug.log*
 .astro/
 .solid/
 .docusaurus/
+.unlighthouse/
 
 # typescript
 *.tsbuildinfo

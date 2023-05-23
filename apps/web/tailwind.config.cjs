@@ -30,4 +30,5 @@ module.exports = {
     },
   },
   plugins: [],
+  presets: [require("@c6r/keyframes")],
 };

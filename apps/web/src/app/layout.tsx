@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Toaster />
 
         <Script
-          async
+          strategy="afterInteractive"
           src="https://umami-bice.vercel.app/script.js"
           data-website-id="c63cecab-ca3e-49e6-8f9c-caf0621cb987"
         />

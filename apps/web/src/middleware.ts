@@ -2,7 +2,7 @@ import { getAuth, withClerkMiddleware } from "@clerk/nextjs/server";
 import type { NextRequest } from "next/server";
 import { NextResponse as res } from "next/server";
 
-const publicPaths = ["/sign-in*", "/sign-up*"];
+const publicPaths = ["/sign-in*", "/sign-up*", "/"];
 
 const isPublic = (path: string) => {
   return publicPaths.find((x) =>
@@ -16,6 +16,12 @@ export default withClerkMiddleware((req: NextRequest) => {
   }
 
   const { userId } = getAuth(req);
+
+  // if (req.nextUrl.pathname === "/") {
+  //   if (!userId) return res.redirect("/home");
+
+  //   return res.redirect("/summary");
+  // }
 
   if (!userId) {
     const signInUrl = new URL("/sign-in", req.url);

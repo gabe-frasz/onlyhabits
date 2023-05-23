@@ -1,4 +1,11 @@
-import { Button, Checkbox, Input, Label } from "@c6r/react";
+import {
+  Button,
+  Checkbox,
+  CheckboxIndicator,
+  Input,
+  InputField,
+  Label,
+} from "@c6r/react";
 import { useAuth } from "@clerk/nextjs";
 import { Check } from "phosphor-react";
 import { FormEvent, useState } from "react";
@@ -63,14 +70,14 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <Label>
         What&apos;s your assignment?
-        <Input.Root>
-          <Input.Field
+        <Input>
+          <InputField
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Workout, sleep well..."
             autoFocus
           />
-        </Input.Root>
+        </Input>
       </Label>
 
       <fieldset className="flex flex-col gap-2">
@@ -78,7 +85,9 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
 
         {staticWeekDays.map((day, i) => (
           <Label key={day} flex="row" className="w-fit cursor-pointer">
-            <Checkbox onCheckedChange={() => handleToggleWeekDays(i)} />
+            <Checkbox onCheckedChange={() => handleToggleWeekDays(i)}>
+              <CheckboxIndicator />
+            </Checkbox>
 
             {day}
           </Label>
