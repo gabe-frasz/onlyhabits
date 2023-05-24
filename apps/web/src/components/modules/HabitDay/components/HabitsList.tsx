@@ -59,7 +59,7 @@ export const HabitsList = (props: HabitsListProps) => {
             <Label key={habit.id} flex="row" className="w-fit">
               <Checkbox
                 theme="success"
-                checked={habit.completed}
+                defaultChecked={habit.completed}
                 onCheckedChange={() => handleToggleHabit(habit.id)}
                 disabled={isDateInPast}
                 className="bg-base-100 peer disabled:cursor-not-allowed"
