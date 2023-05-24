@@ -50,18 +50,16 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
       return;
     }
 
-    try {
-      await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits", {
-        method: "POST",
-        body: JSON.stringify({ title, weekDays }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
-    } catch (error) {
-      return console.log(error);
-    }
+    const response = await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits", {
+      method: "POST",
+      body: JSON.stringify({ title, weekDays }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
+
+    if (!response.ok) return console.log(response);
 
     onSuccess();
   }
