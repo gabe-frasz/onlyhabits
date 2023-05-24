@@ -51,6 +51,8 @@ export const HabitsList = (props: HabitsListProps) => {
   if (isLoading) return <Spinner size={32} />;
   if (error || !data) return <div>Error</div>;
 
+  console.table(data.habits);
+
   return (
     <div className="flex flex-col gap-3">
       {data.habits.length === 0
