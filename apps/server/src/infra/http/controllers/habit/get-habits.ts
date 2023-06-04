@@ -9,7 +9,7 @@ import { HabitViewModel } from "../../view-models";
 /**
  * @route /habits
  * @method GET
- * @description Get all habits
+ * @description Get all habits of specific day
  * @protected
  * @returns 200 || 400
  */

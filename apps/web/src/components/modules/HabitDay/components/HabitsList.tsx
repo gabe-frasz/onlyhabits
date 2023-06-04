@@ -1,9 +1,9 @@
 import { Checkbox, CheckboxIndicator, Label, Spinner, Text } from "@c6r/react";
-import { useAuth } from "@clerk/nextjs";
 import dayjs from "dayjs";
 
 import { env } from "@/env";
 import { useClerkSWR } from "@/hooks";
+import { useRouter } from "next/navigation";
 
 interface HabitsResponse {
   habits: {
@@ -21,10 +21,9 @@ interface HabitsListProps {
 }
 
 export const HabitsList = (props: HabitsListProps) => {
-  const { data, isLoading, error, mutate } = useClerkSWR<HabitsResponse>(
-    `/habits?date=${props.date.toISOString()}`,
-  );
-  const { getToken } = useAuth();
+  const { data, isLoading, error, mutate, getToken } =
+    useClerkSWR<HabitsResponse>(`/habits?date=${props.date.toISOString()}`);
+  const { refresh } = useRouter();
 
   const isDateInPast = dayjs(props.date).isBefore(new Date(), "day");
 
@@ -46,6 +45,8 @@ export const HabitsList = (props: HabitsListProps) => {
 
       mutate({ habits: habitListWithToggledItem! }, { revalidate: false }),
     ]);
+
+    refresh();
   }
 
   if (isLoading) return <Spinner size={32} />;

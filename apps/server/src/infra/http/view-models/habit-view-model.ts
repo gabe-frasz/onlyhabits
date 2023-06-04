@@ -6,8 +6,7 @@ export class HabitViewModel {
       id: habit.id,
       title: habit.title,
       weekDays: habit.weekDays.value,
-      completed:
-        completedHabitsId?.some((habitId) => habitId === habit.id) ?? false,
+      completed: completedHabitsId?.includes(habit.id) ?? false,
       createdAt: habit.createdAt,
     };
   }

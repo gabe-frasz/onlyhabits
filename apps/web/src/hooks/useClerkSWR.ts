@@ -7,10 +7,12 @@ export function useClerkSWR<T>(key: string) {
   const { getToken } = useAuth();
 
   const fetcher = async (key: string) => {
-    return (await fetch(env.NEXT_PUBLIC_SERVER_API_URL + key, {
+    const res = await fetch(env.NEXT_PUBLIC_SERVER_API_URL + key, {
       headers: { Authorization: `Bearer ${await getToken()}` },
-    }).then((res) => res.json())) as any;
+    });
+
+    return res.json() as any;
   };
 
-  return useSWR<T>(key, fetcher);
+  return { ...useSWR<T>(key, fetcher), getToken };
 }

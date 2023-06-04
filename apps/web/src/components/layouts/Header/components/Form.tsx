@@ -7,6 +7,7 @@ import {
   Label,
 } from "@c6r/react";
 import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { Check } from "phosphor-react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
@@ -29,6 +30,7 @@ interface FormProps {
 
 export const Form = ({ onSuccess = () => {} }: FormProps) => {
   const { getToken } = useAuth();
+  const { refresh } = useRouter();
   const [title, setTitle] = useState("");
   const [weekDays, setHabitWeekDays] = useState<number[]>([]);
 
@@ -50,20 +52,19 @@ export const Form = ({ onSuccess = () => {} }: FormProps) => {
       return;
     }
 
-    try {
-      await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits", {
-        method: "POST",
-        body: JSON.stringify({ title, weekDays }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
-    } catch (error) {
-      return console.log(error);
-    }
+    const response = await fetch(env.NEXT_PUBLIC_SERVER_API_URL + "/habits", {
+      method: "POST",
+      body: JSON.stringify({ title, weekDays }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
+
+    if (!response.ok) return console.log(response);
 
     onSuccess();
+    refresh();
   }
 
   return (

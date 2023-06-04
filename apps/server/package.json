@@ -19,7 +19,7 @@
   "dependencies": {
     "@clerk/fastify": "^0.2.6",
     "@fastify/cors": "^8.2.1",
-    "@prisma/client": "^4.13.0",
+    "@prisma/client": "^4.15.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
@@ -31,7 +31,7 @@
     "@types/supertest": "^2.0.12",
     "@vitest/coverage-c8": "^0.28.5",
     "@vitest/ui": "^0.28.5",
-    "prisma": "^4.13.0",
+    "prisma": "^4.15.0",
     "prisma-erd-generator": "^1.7.0",
     "supertest": "^6.3.3",
     "tsconfig": "workspace:*",
