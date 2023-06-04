@@ -33,5 +33,7 @@ export const getHabits: RouteHandlerMethod = async (req, res) => {
     HabitViewModel.toHttp(habit, completedHabitsId),
   );
 
+  console.log(possibleHabits, completedHabitsId);
+
   res.send({ habits });
 };
