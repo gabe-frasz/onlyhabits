@@ -34,7 +34,7 @@ export class PrismaHabitsRepository implements HabitsRepository {
       where: {
         user_id_date: {
           user_id: userId,
-          date,
+          date: dayjs(date).startOf("day").toDate(),
         },
       },
       include: {
